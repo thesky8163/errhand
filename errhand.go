@@ -2,8 +2,8 @@ package errhand
 
 import (
 	"fmt"
-	"runtime"
 	"log"
+	"runtime"
 )
 
 //var err error
@@ -32,18 +32,19 @@ func Fprintfr(msg string, err error) {
 	}
 
 }
-func ReturnErr(err error) {
+func ReturnErr(err error) error {
 	if err != nil {
 		return err
 	}
-
+	return nil
 }
+
 func Fprintfunc(msg string, err error, add func()) {
 	if err != nil {
 		add()
 		fmt.Printf(Errinfo()+msg, err)
 	}
-}s
+}
 func Fprintfuncr(msg string, err error, add func()) {
 	if err != nil {
 		add()
