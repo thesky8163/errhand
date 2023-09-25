@@ -45,6 +45,7 @@ func Fprintfunc(msg string, err error, add func()) {
 		fmt.Printf(Errinfo()+msg, err)
 	}
 }
+
 func Fprintfuncr(msg string, err error, add func()) {
 	if err != nil {
 		add()
@@ -52,6 +53,7 @@ func Fprintfuncr(msg string, err error, add func()) {
 		return
 	}
 }
+
 func Fprintln(msg string, err error) {
 	if err != nil {
 		//fmt.Println("insert failed, err:", err)
