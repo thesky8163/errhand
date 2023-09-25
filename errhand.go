@@ -14,7 +14,7 @@ func Errinfo() (errmsg string) {
 		fmt.Println("Failed to get caller information")
 	}
 	funcName := runtime.FuncForPC(pc).Name()
-	return fmt.Sprintf("Error in function %s near %s:%d: ", funcName, file, line)
+	return fmt.Sprintf("Error in function %s at %s:%d: ", funcName, file, line)
 }
 
 func Fprintf(msg string, err error) {
