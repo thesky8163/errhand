@@ -17,21 +17,29 @@ func Errinfo() (errmsg string) {
 	return fmt.Sprintf("Error in function %s at %s:%d: ", funcName, file, line)
 }
 
-func Fprintf(msg string, err error) {
-	if err != nil {
-		//fmt.Printf("insert failed, err:%v\n", err)
-		fmt.Printf(Errinfo()+msg, err)
+func Fprintf(format string, a ...interface{}) {
+	err, ok := a[len(a)-1].(error)
+	if ok {
+		if err != nil {
+			fmt.Printf(Errinfo()+format, a...)
+		}
+	} else {
+		fmt.Println("errhand err: The last parameter type for error handling must be errors")
 	}
 }
 
-func Fprintfr(msg string, err error) {
-	if err != nil {
-		//fmt.Printf("insert failed, err:%v\n", err)
-		fmt.Printf(Errinfo()+msg, err)
-		return
+func FprintfR(format string, a ...interface{}) {
+	err, ok := a[len(a)-1].(error)
+	if ok {
+		if err != nil {
+			fmt.Printf(Errinfo()+format, a...)
+			return
+		}
+	} else {
+		fmt.Println("errhand err: The last parameter type for error handling must be errors")
 	}
-
 }
+
 func ReturnErr(err error) error {
 	if err != nil {
 		return err
@@ -39,77 +47,127 @@ func ReturnErr(err error) error {
 	return nil
 }
 
-func Fprintfunc(msg string, err error, add func()) {
-	if err != nil {
-		add()
-		fmt.Printf(Errinfo()+msg, err)
+func Fprintfunc(format string, add func(), a ...interface{}) {
+	err, ok := a[len(a)-1].(error)
+	if ok {
+		if err != nil {
+			add()
+			fmt.Printf(Errinfo()+format, a...)
+		}
+	} else {
+		fmt.Println("errhand err: The last parameter type for error handling must be errors")
 	}
 }
 
-func Fprintfuncr(msg string, err error, add func()) {
-	if err != nil {
-		add()
-		fmt.Printf(Errinfo()+msg, err)
-		return
+func FprintfuncR(format string, add func(), a ...interface{}) {
+	err, ok := a[len(a)-1].(error)
+	if ok {
+		if err != nil {
+			add()
+			fmt.Printf(Errinfo()+format, a...)
+			return
+		}
+	} else {
+		fmt.Println("errhand err: The last parameter type for error handling must be errors")
 	}
 }
 
-func Fprintln(msg string, err error) {
-	if err != nil {
-		//fmt.Println("insert failed, err:", err)
-		fmt.Println(Errinfo(), msg, err)
+func Fprintln(a ...interface{}) {
+	err, ok := a[len(a)-1].(error)
+	if ok {
+		if err != nil {
+			//fmt.Println("insert failed, err:", err)
+			fmt.Print(Errinfo())
+			fmt.Println(a...)
+		}
+	} else {
+		fmt.Println("errhand err: The last parameter type for error handling must be errors")
 	}
 }
 
-func Fprintlnr(msg string, err error) {
-	if err != nil {
-		//fmt.Println("insert failed, err:", err)
-		fmt.Println(Errinfo(), msg, err)
-		return
-	}
-}
-func Lprintf(msg string, err error) {
-	if err != nil {
-		//fmt.Printf("insert failed, err:%v\n", err)
-		log.Printf(Errinfo()+msg, err)
-	}
-}
-
-func Lprintfr(msg string, err error) {
-	if err != nil {
-		//fmt.Printf("insert failed, err:%v\n", err)
-		log.Printf(Errinfo()+msg, err)
-		return
-	}
-
-}
-
-func Lprintfunc(msg string, err error, add func()) {
-	if err != nil {
-		add()
-		log.Printf(Errinfo()+msg, err)
-	}
-}
-func Lprintfuncr(msg string, err error, add func()) {
-	if err != nil {
-		add()
-		log.Printf(Errinfo()+msg, err)
-		return
-	}
-}
-func Lprintln(msg string, err error) {
-	if err != nil {
-		//fmt.Println("insert failed, err:", err)
-		log.Println(Errinfo(), msg, err)
+func FprintlnR(a ...interface{}) {
+	err, ok := a[len(a)-1].(error)
+	if ok {
+		if err != nil {
+			//fmt.Println("insert failed, err:", err)
+			fmt.Print(Errinfo())
+			fmt.Println(a...)
+			return
+		}
+	} else {
+		fmt.Println("errhand err: The last parameter type for error handling must be errors")
 	}
 }
 
-func Lprintlnr(msg string, err error) {
-	if err != nil {
-		//fmt.Println("insert failed, err:", err)
-		log.Println(Errinfo(), msg, err)
-		return
+func Lprintf(format string, a ...interface{}) {
+	err, ok := a[len(a)-1].(error)
+	if ok {
+		if err != nil {
+			log.Printf(Errinfo()+format, a...)
+		}
+	} else {
+		fmt.Println("errhand err: The last parameter type for error handling must be errors")
 	}
 }
 
-// 
+func LprintfR(format string, a ...interface{}) {
+	err, ok := a[len(a)-1].(error)
+	if ok {
+		if err != nil {
+			log.Printf(Errinfo()+format, a...)
+			return
+		}
+	} else {
+		fmt.Println("errhand err: The last parameter type for error handling must be errors")
+	}
+}
+
+func Lprintfunc(format string, add func(), a ...interface{}) {
+	err, ok := a[len(a)-1].(error)
+	if ok {
+		if err != nil {
+			add()
+			log.Printf(Errinfo()+format, a...)
+		}
+	} else {
+		fmt.Println("errhand err: The last parameter type for error handling must be errors")
+	}
+}
+
+func LprintfuncR(format string, add func(), a ...interface{}) {
+	err, ok := a[len(a)-1].(error)
+	if ok {
+		if err != nil {
+			add()
+			log.Printf(Errinfo()+format, a...)
+			return
+		}
+	} else {
+		fmt.Println("errhand err: The last parameter type for error handling must be errors")
+	}
+}
+
+func Lprintln(a ...interface{}) {
+	err, ok := a[len(a)-1].(error)
+	if ok {
+		if err != nil {
+			log.Println(Errinfo(), a)
+		}
+	} else {
+		fmt.Println("errhand err: The last parameter type for error handling must be errors")
+	}
+}
+
+func LprintlnR(a ...interface{}) {
+	err, ok := a[len(a)-1].(error)
+	if ok {
+		if err != nil {
+			log.Println(Errinfo(), a)
+			return
+		}
+	} else {
+		fmt.Println("errhand err: The last parameter type for error handling must be errors")
+	}
+}
+
+
