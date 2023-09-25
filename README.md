@@ -1,1 +1,1 @@
-# errhand
+## This is a simple error handling program in the Go programming language.
